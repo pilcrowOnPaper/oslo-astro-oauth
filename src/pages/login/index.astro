@@ -1,8 +1,7 @@
 ---
-if (!Astro.locals.session) {
-  return Astro.redirect("/login");
+if (Astro.locals.session) {
+  return Astro.redirect("/");
 }
-const { user } = Astro.locals.session;
 ---
 
 <html lang="en">
@@ -11,13 +10,10 @@ const { user } = Astro.locals.session;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>Oslo demo</title>
   </head>
   <body>
-    <h1>Hi, {user.username}!</h1>
-    <p>Your user id is {user.userId}</p>
-	<form method="post" action="/logout">
-		<button>Sign out</button>
-	</form>
+    <h1>Sign in</h1>
+    <a href="/login/github">Sign in with Github</a>
   </body>
 </html>
