@@ -54,6 +54,13 @@ export async function validateSession(
     return null;
   }
   if (session.fresh) {
+    await db
+      .updateTable("session")
+      .set({
+        expires: session.expiresAt.toISOString(),
+      })
+      .where("session.id", "=", session.sessionId)
+      .execute();
     const cookie = sessionCookieController.createSessionCookie(
       session.sessionId
     );
